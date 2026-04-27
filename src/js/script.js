@@ -79,5 +79,5 @@ function produtosCard(lista){
         container.innerHTML=htmlProdutos;
 
 }
-produtosCard();
+produtosCard(produtos);
 

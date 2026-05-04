@@ -60,7 +60,7 @@ console.log(produtos)
 
 //vinculou com o ID
 const container=document.getElementById("lista-produtos")
-
+const mostrarTotal=document.getElementById("resultado-total")
 //Criando os Cards e replicando automaticamente
 
 // => arrow phant / uma função executando outra dentro (CALLBACK)
@@ -68,6 +68,7 @@ const container=document.getElementById("lista-produtos")
 // shift + ` + espaço
 
 function produtosCard(lista){
+    mostrarTotal.innerHTML=""; // Mostra tudo imagem,card,video,td conteudo
     const htmlProdutos = lista.map(item => `
         <div class="card">
             <h3>${item.nome}</h3>
@@ -77,7 +78,20 @@ function produtosCard(lista){
         `).join(''); //transforma o ARRAY em uma unica STRING
 
         container.innerHTML=htmlProdutos;
-
 }
-produtosCard(produtos);
 
+//FILTER - CRIA UMA NOVA LISTA APENAS COM O QUE PESQUISAR
+
+function filtrarPromocoes(){
+    const promocionais = produtos.filter(item => item.emPromocao);
+    produtosCard(promocionais);
+}
+
+//REDUCE - Reduz o array em um unico valor(soma de preços)
+
+function calcularTotal(){
+    const total = produtos.reduce((acumulador,item)=>{
+        return acumulador + item.preco;
+    },0);
+    mostrarTotal.innerText =`Valor Total R$ ${total}`;
+}
